@@ -109,15 +109,9 @@
 
         $(".saveBtn").on("click", function () {
           var rowIndex = $(this).attr("rowIndex");
-          console.log ("rowIndex", rowIndex);
-          console.log ("text", $(this).siblings('.appointment').val());
-          // localStorage.setItem("appointments", JSON.stringify(appointments));
           appointments[rowIndex] = $(this).siblings('.appointment').val();
-          console.log ("appt", appointments);
           localStorage.setItem("appointments", JSON.stringify(appointments));
         });
-
-
 
       });    
     </script>
