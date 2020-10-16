@@ -30,7 +30,7 @@ textarea{
   border-radius: 15px;
 }
 
-.row {
+.rowRow {
   white-space: pre-wrap;
   height: 80px;
   border-top: 1px solid white;;
@@ -58,14 +58,22 @@ textarea{
 }
 
 .saveBtn {
-  border-left: 1px solid black;
+  border-top: 38px solid #06AED5;
+  border-left: 1px solid #06AED5;
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
   background-color: #06AED5;
   color: white;
-}
+  padding-bottom: -24px;
+ 
+ }
 
 .saveBtn i:hover {
   font-size: 20px;
   transition: all .3s ease-in-out;
+}
+
+.appointment {
+  white-space: pre-wrap;
+  border-color: 1px solid black;
 }
