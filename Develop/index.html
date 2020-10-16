@@ -29,7 +29,6 @@
       <p id="currentDay" class="lead"></p>
     </header>
     <div class="container">
-      <button class="fas fa-save"></button>
       <!-- Timeblocks go here -->
 
 
@@ -56,12 +55,13 @@
          "st"];
         var displayDate = dayOfWeek[date.getDay()] + "," + month[date.getMonth()] + " " + date.getDate() + superS[date.getDate()+1];
 */
+
         var displayDate = moment().format('dddd, MMMM Do');
-        var currentHour = parseInt(moment().format('h'));
+        var currentHour = parseInt(moment().format('HH')-9);
         $("#currentDay").text(displayDate);
         /*
         ** display standard office hours
-        */
+
         var appointment = [
           {hour: "9AM", appt: ""},
           {hour: "10AM", appt: ""},
@@ -73,41 +73,51 @@
           {hour: "4PM", appt: ""},
           {hour: "5PM", appt: ""}
         ];
+        */
+        var hours = [" 9AM","10AM","11AM", "12PM"," 1PM"," 2PM"," 3PM"," 4PM"," 5PM"];
+        var appointments = [];
+                
+        var storedAppt = JSON.parse(localStorage.getItem("appointments"));
+        if (storedAppt != null) appointments = storedAppt;
 
         for (var i=0; i<9; i++){
-
-
+ 
           var hourRow = $("<section>");
           hourRow.addClass("hourRow");
           $('.container').append(hourRow);
 
           var timeBlock = $("<time-block>");
-          timeBlock.addClass("hour");
-          timeBlock.attr("hourNumber",appointment[i].hour);
-          timeBlock.text(appointment[i].hour);
+          timeBlock.addClass("hour col-md-1");
+          timeBlock.attr("hourNumber",hours[i]);
+          timeBlock.text(hours[i]);
           hourRow.append(timeBlock);
 
-          var apptBlock = $("<textarea>");
-          apptBlock.addClass("appointment");
-          apptBlock.attr("appointment", appointment[i].appt);
-          apptBlock.text(appointment[i].appt)
+          var apptBlock = $("<textarea> row='3'");
+          apptBlock.addClass("appointment col-md-8");
+          if (i < currentHour) apptBlock.addClass("past");
+          if (i == currentHour) apptBlock.addClass("present");
+          if (i > currentHour) apptBlock.addClass("future");
+          apptBlock.attr("appointment", appointments[i]);
+          apptBlock.text(appointments[i]);
           hourRow.append(apptBlock);
 
           var saveBtn = $("<button>");
-          saveBtn.addClass("saveBtn")
-          saveBtn.attr("saveBtn","fas fa-save");
+          saveBtn.addClass("saveBtn fas fa-save col-md-1")
+          saveBtn.attr("rowIndex",i);
           hourRow.append(saveBtn);
-
         }
-/*
-        $("".saveBtn").on("click", function () {
-          localStorage.
+
+        $(".saveBtn").on("click", function () {
+          var rowIndex = $(this).attr("rowIndex");
+          console.log ("rowIndex", rowIndex);
+          console.log ("text", $(this).siblings('.appointment').val());
+          // localStorage.setItem("appointments", JSON.stringify(appointments));
+          appointments[rowIndex] = $(this).siblings('.appointment').val();
+          console.log ("appt", appointments);
+          localStorage.setItem("appointments", JSON.stringify(appointments));
         });
 
-        function saveAppt() {
-           localStorage.setItem
-        }
-*/
+
 
       });    
     </script>
