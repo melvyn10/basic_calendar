@@ -41,38 +41,11 @@
 
       $(document).ready(function() {
 
-/*
-** I did this before I found cloundflare does it all for you
-** Seems a waste to just delete it
-**
-        var date=new Date();
-        var dayOfWeek = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-        var month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-        var superS = 
-        ["st","nd","rd","th","th","th","th","th","th","th",
-         "th","th","th","th","th","th","th","th","th","th",
-         "st","nd","rd","th","th","th","th","th","th","th",
-         "st"];
-        var displayDate = dayOfWeek[date.getDay()] + "," + month[date.getMonth()] + " " + date.getDate() + superS[date.getDate()+1];
-*/
-
         var displayDate = moment().format('dddd, MMMM Do');
         var currentHour = parseInt(moment().format('HH')-9);
         $("#currentDay").text(displayDate);
         /*
         ** display standard office hours
-
-        var appointment = [
-          {hour: "9AM", appt: ""},
-          {hour: "10AM", appt: ""},
-          {hour: "11AM", appt: ""},
-          {hour: "12PM", appt: ""},
-          {hour: "1PM", appt: ""},
-          {hour: "2PM", appt: ""},
-          {hour: "3PM", appt: ""},
-          {hour: "4PM", appt: ""},
-          {hour: "5PM", appt: ""}
-        ];
         */
 
         // define business hours
@@ -82,7 +55,9 @@
         var storedAppt = JSON.parse(localStorage.getItem("appointments"));
         if (storedAppt != null) appointments = storedAppt;
 
-        // loop through the business hours to create each row
+        /*
+	** loop through the business hours to create each row
+	*/
         for (var i=0; i<9; i++){
  
           var hourRow = $("<section>");
@@ -113,7 +88,11 @@
           hourRow.append(saveBtn);
         }
 
-        // Store what was entered in the local storage if the button is pressed
+        /*
+	** When teh save button is pressed, 
+	** find what was entered in the sybling text field for appt
+	** and save in the local storage 
+	*/
         $(".saveBtn").on("click", function () {
           var rowIndex = $(this).attr("rowIndex");
           appointments[rowIndex] = $(this).siblings('.appointment').val();
