@@ -26,4 +26,4 @@ Create a new repository in your GitHub application.
 Download the files
 Publish the website in GitHub
 
-![image] (https://github.com/melvyn10/basic_calendar/blob/main/Assets/Scheduler.gif)
+![image](https://github.com/melvyn10/basic_calendar/blob/main/Assets/Scheduler.gif)
